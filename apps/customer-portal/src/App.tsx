@@ -7,6 +7,7 @@ const App = () => (
     <div className="card">
       <Button onClick={() =>{ alert(formatCurrency(12345)); }}>Click me</Button>
     </div>
+    <div onClick={() =>{}}></div>
   </>
 );
 
