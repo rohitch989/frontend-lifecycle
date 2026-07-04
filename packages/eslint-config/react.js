@@ -50,5 +50,15 @@ export const reactConfig = [
             "no-console": "warn",
             "prefer-const": "error"
         }
+    },
+
+    {
+        files: ["**/src/test/_mocks_/*.js"],
+
+        languageOptions: {
+            globals: {
+                ...globals.node
+            }
+        }
     }
 ];
