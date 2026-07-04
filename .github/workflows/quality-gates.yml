@@ -140,6 +140,12 @@ jobs:
         run: pnpm --filter customer-portal test
 
       - name: Run SonarCloud Analysis
+        if: ${{ secrets.SONAR_TOKEN != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false) }}
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+
+      - name: Skip SonarCloud Analysis
+        if: ${{ secrets.SONAR_TOKEN == '' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == true) }}
+        run: echo "Skipping SonarCloud analysis because SONAR_TOKEN is not configured or the pull request comes from a fork."
